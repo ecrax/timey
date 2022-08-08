@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toMiliseconds } from "../utils/time";
 import { trpc } from "../utils/trpc";
-import { NumberInput } from "./components/Input";
+import { NumberInput } from "../components/Input";
 
 const Home: NextPage = () => {
   const {
