@@ -78,17 +78,26 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
         {data && !isLoading && timeLeft ? (
           <div className="text-5xl">
-            {timeLeft.hours.toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-            })}
-            :
-            {timeLeft.minutes.toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-            })}
-            :
-            {timeLeft.seconds.toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-            })}
+            {timeLeft.days == 0 &&
+            timeLeft.hours == 0 &&
+            timeLeft.minutes == 0 &&
+            timeLeft.seconds == 0 ? (
+              <div>Time is up!</div>
+            ) : (
+              <div>
+                {timeLeft.hours.toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                })}
+                :
+                {timeLeft.minutes.toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                })}
+                :
+                {timeLeft.seconds.toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                })}
+              </div>
+            )}
           </div>
         ) : (
           <div>Loading...</div>
