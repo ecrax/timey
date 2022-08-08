@@ -26,10 +26,10 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
   });
 
   const calculateTimeLeft = () => {
-    //const x = +data?.createdAt! + data?.duration!;
-    //const d = x - +new Date();
+    //TODO: handle time up and no data properly
+    if (!data) return;
 
-    const d = +data?.due! - +new Date();
+    const d = +data.due - +new Date();
 
     let timeLeft: TimeLeft = {
       days: 0,
@@ -49,12 +49,15 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }>(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<
+    | {
+        days: number;
+        hours: number;
+        minutes: number;
+        seconds: number;
+      }
+    | undefined
+  >(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -64,19 +67,7 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
     return () => clearTimeout(timer);
   });
 
-  const timerComponents: React.ReactNode[] = [];
-
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval as keyof typeof timeLeft]) {
-      return;
-    }
-
-    timerComponents.push(
-      <span>
-        {timeLeft[interval as keyof typeof timeLeft]} {interval}{" "}
-      </span>
-    );
-  });
+  //TODO: delete db entry on completion
 
   return (
     <>
@@ -86,13 +77,19 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
-        {data ? (
+        {data && !isLoading && timeLeft ? (
           <div>
-            {timerComponents.length ? (
-              timerComponents
-            ) : (
-              <span>Time&apos;s up!</span>
-            )}
+            {timeLeft.hours.toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+            })}
+            :
+            {timeLeft.minutes.toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+            })}
+            :
+            {timeLeft.seconds.toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+            })}
           </div>
         ) : (
           <div>Loading...</div>
