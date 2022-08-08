@@ -26,7 +26,6 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
   });
 
   const calculateTimeLeft = () => {
-    //TODO: handle time up and no data properly
     if (!data) return;
 
     const d = +data.due - +new Date();
@@ -78,7 +77,7 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
         {data && !isLoading && timeLeft ? (
-          <div>
+          <div className="text-5xl">
             {timeLeft.hours.toLocaleString("en-US", {
               minimumIntegerDigits: 2,
             })}

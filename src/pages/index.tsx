@@ -73,9 +73,9 @@ const Home: NextPage = () => {
 
             const dueTime = +Date.now() + durationMs;
 
-            const { id } = await createTimer({ due: new Date(dueTime) });
+            const { shortId } = await createTimer({ due: new Date(dueTime) });
 
-            router.push("/" + id);
+            router.push("/" + shortId);
           }}
         >
           Create

@@ -17,8 +17,8 @@ model Example {
 }
 
 model Timer {
-    id        String   @id @default(cuid())
-    due       DateTime
+    shortId String @id
+    due     DateTime
 }
 
 // Necessary for Next auth
