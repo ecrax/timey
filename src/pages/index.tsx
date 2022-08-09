@@ -25,7 +25,6 @@ const Home: NextPage = () => {
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
         <label>
-          Time required
           <NumberInput
             placeholder="Hours"
             name="hours"
