@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 
 export const timerRouter = t.router({
   create: t.procedure
-    .input(z.object({ due: z.date() }))
+    .input(z.object({ due: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const { shortId } = await ctx.prisma.timer.create({
         data: {

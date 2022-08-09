@@ -11,6 +11,6 @@ datasource db {
 
 model Timer {
     shortId String @id
-    due     DateTime
+    due     BigInt
 }
 

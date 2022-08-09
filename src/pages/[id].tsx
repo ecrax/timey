@@ -28,7 +28,7 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
   const calculateTimeLeft = () => {
     if (!data) return;
 
-    const d = +data.due - +new Date();
+    const d = Number(data.due) - +new Date();
 
     let timeLeft: TimeLeft = {
       days: 0,
