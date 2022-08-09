@@ -21,6 +21,7 @@ const TimerPage: NextPage = () => {
 };
 
 const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
+  const currentTime = +new Date();
   const { isLoading, error, data } = trpc.proxy.timer.getById.useQuery({
     id: id,
   });
@@ -28,7 +29,7 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
   const calculateTimeLeft = () => {
     if (!data) return;
 
-    const d = Number(data.due) - +new Date();
+    const d = Number(data.due) - currentTime;
 
     let timeLeft: TimeLeft = {
       days: 0,
@@ -61,7 +62,7 @@ const TimerPageContent: React.FC<{ id: string }> = ({ id }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    }, 10);
 
     return () => clearTimeout(timer);
   });
